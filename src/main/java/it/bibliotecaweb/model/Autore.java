@@ -82,6 +82,8 @@ public class Autore {
 			this.libri = libri;
 		}
 		
-		
+		public String toString() {
+			return nome;
+		}
 
 }

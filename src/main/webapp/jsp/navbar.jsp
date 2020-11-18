@@ -17,7 +17,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="../index.jsp">Home</a>
+          <a class="dropdown-item" href="./jsp/index.jsp">Home</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath}/ListArticoliServlet">Risultati</a>
           <a class="dropdown-item" href="../insert.jsp">Inserisci nuovo elemento</a>
         </div>

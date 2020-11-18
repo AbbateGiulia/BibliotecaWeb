@@ -18,6 +18,8 @@ public interface LibroService {
 	public boolean inserisciNuovo(Libro libroInstance) throws Exception;
 
 	public boolean rimuovi(Libro libroInstance) throws Exception;
+	
+	public Set<Libro> ricercaLibro (Libro input) throws Exception;
 
 
 	// per injection

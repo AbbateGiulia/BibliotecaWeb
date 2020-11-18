@@ -1,5 +1,6 @@
 package it.bibliotecaweb.service.libro;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -60,8 +61,7 @@ public class LibroServiceImpl implements LibroService {
 
 		for (Libro c : libroDAO.list()) {
 			if (c.equals(libroInstance)) {
-				System.out.println("trama già esistente");
-				return b;
+				throw new Exception("trama già esistente");
 			}
 		}
 		// questo Ã¨ come una connection
@@ -103,14 +103,12 @@ public class LibroServiceImpl implements LibroService {
 			
 			for (Libro c : libroDAO.list()) {
 				if (c.equals(libroInstance)) {
-					System.out.println("trama già esistente");
-					return b;
+					throw new Exception("trama già esistente");
 				}
 			} 
 			
 			if (libroInstance.getAutore()== null) {
-				System.out.println("non puoi creare libro senza autore");
-				return b;
+				throw new Exception("il libro deve avere l'autore");
 			}
 
 			// eseguo quello che realmente devo fare
@@ -154,6 +152,31 @@ public class LibroServiceImpl implements LibroService {
 	public void setLibroDAO(LibroDAO libroDAO) {
 		this.libroDAO = libroDAO;
 
+	}
+
+	@Override
+	public Set<Libro> ricercaLibro(Libro input) throws Exception {
+		Set<Libro> result = new HashSet<Libro>();
+		// questo Ã¨ come una connection
+				EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+				try {
+					// questo ha l'analogia con il MyConnection.getConnection()
+					entityManager.getTransaction().begin();
+
+					// uso l'injection per il dao
+					libroDAO.setEntityManager(entityManager);
+
+					// eseguo quello che realmente devo fare
+					result=libroDAO.searchLibro(input);
+
+					entityManager.getTransaction().commit();
+				} catch (Exception e) {
+					entityManager.getTransaction().rollback();
+					e.printStackTrace();
+					throw e;
+				}
+				return result;
 	}
 
 }

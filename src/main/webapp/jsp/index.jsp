@@ -31,10 +31,12 @@
 	      <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
 	      
 	      
-	      <p><a class="btn btn-primary btn-lg" href="PrepareLoginServlet" role="button">Login &raquo;</a></p>  
+	      <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/PrepareLoginServlet" role="button">Login &raquo;</a></p>  
 	     
-	      <p><a class="btn btn-primary btn-lg" href="ListLibriServlet" role="button">Vai alla Lista di Libri &raquo;</a></p>
-	      <p><a class="btn btn-primary btn-lg" href="ListAutoriServlet" role="button">Vai alla Lista di Autori &raquo;</a></p>
+	      <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/visualizza/ListLibriServlet" role="button">Vai alla Lista di Libri &raquo;</a></p>
+	      <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/visualizza/ListAutoriServlet" role="button">Vai alla Lista di Autori &raquo;</a></p>
+	       <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/cerca/PrepareSearchLibroServlet" role="button">Cerca Libro &raquo;</a></p>
+	        <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/cerca/PrepareSearchUtenteServlet" role="button">Cerca Utente &raquo;</a></p>
 	    
 	      
 	    </div>

@@ -1,6 +1,7 @@
 
 package it.bibliotecaweb.service.utente;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
@@ -9,6 +10,7 @@ import it.bibliotecaweb.dao.EntityManagerUtil;
 import it.bibliotecaweb.dao.utente.UtenteDAO;
 import it.bibliotecaweb.model.Ruolo;
 import it.bibliotecaweb.model.Utente;
+import it.bibliotecaweb.util.Util;
 
 public class UtenteServiceImpl implements UtenteService {
 
@@ -71,8 +73,7 @@ public class UtenteServiceImpl implements UtenteService {
 			
 			for(Utente c: utenteDAO.list()) {
 				if(c.equals(utenteInstance)) {
-					System.out.println("user già esistente");
-					return b;
+					throw new Exception("user già esistente");
 				}
 			}
 
@@ -105,8 +106,7 @@ public class UtenteServiceImpl implements UtenteService {
 			
 			for (Utente c : utenteDAO.list()) {
 				if (c.equals(utenteInstance)) {
-					System.out.println("user già esistente");
-					return b;
+					throw new Exception("user già esistente");
 				}
 			}
 
@@ -183,6 +183,55 @@ public class UtenteServiceImpl implements UtenteService {
 	public void setUtenteDAO(UtenteDAO utenteDAO) {
 		this.utenteDAO = utenteDAO;
 
+	}
+
+	@Override
+	public Utente cercaUser(String username) throws Exception {
+		// questo è come una connection
+				EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+				try {
+					// uso l'injection per il dao
+					utenteDAO.setEntityManager(entityManager);
+					
+					if(Util.isEmptyOrNull(username)) {
+						throw new Exception("imput non valido");
+					}
+
+					// eseguo quello che realmente devo fare
+					return utenteDAO.getUser(username);
+
+				} catch (Exception e) {
+					e.printStackTrace();
+					throw e;
+				} finally {
+					entityManager.close();
+				}
+	}
+
+	@Override
+	public Set<Utente> ricercaUtente(Utente input) throws Exception {
+		Set<Utente> result = new HashSet<Utente>();
+		// questo Ã¨ come una connection
+				EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+				try {
+					// questo ha l'analogia con il MyConnection.getConnection()
+					entityManager.getTransaction().begin();
+
+					// uso l'injection per il dao
+					utenteDAO.setEntityManager(entityManager);
+
+					// eseguo quello che realmente devo fare
+					result=utenteDAO.searchUtente(input);
+
+					entityManager.getTransaction().commit();
+				} catch (Exception e) {
+					entityManager.getTransaction().rollback();
+					e.printStackTrace();
+					throw e;
+				}
+				return result;
 	}
 
 }

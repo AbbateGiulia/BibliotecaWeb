@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,7 +39,15 @@ public class Utente {
 		@Enumerated(EnumType.STRING)
 		private StatoUtente stato = StatoUtente.ATTIVO;
 
-	@ManyToMany
+	public StatoUtente getStato() {
+			return stato;
+		}
+
+		public void setStato(StatoUtente stato) {
+			this.stato = stato;
+		}
+
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "utente_ruolo", joinColumns = @JoinColumn(name = "utente_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "ruolo_id", referencedColumnName = "ID"))
 	private Set<Ruolo> ruoli = new HashSet<>(0);
 
@@ -54,6 +63,12 @@ public class Utente {
 	public Utente(String username, String password, String nome, String cognome) {
 		this.username = username;
 		this.password = password;
+		this.nome = nome;
+		this.cognome = cognome;
+	}
+	
+	public Utente( String nome, String cognome, String username) {
+		this.username = username;		
 		this.nome = nome;
 		this.cognome = cognome;
 	}
@@ -115,14 +130,63 @@ public class Utente {
 	}
 	
 	@Override
-	public boolean equals(Object o) {
-		if (o instanceof Utente) {
-			Utente utente = (Utente) o;
-			return username.equals(utente.getUsername());
-		} else {
-			return this.equals(o);
-		}
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cognome == null) ? 0 : cognome.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((ruoli == null) ? 0 : ruoli.hashCode());
+		result = prime * result + ((stato == null) ? 0 : stato.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Utente other = (Utente) obj;
+		if (cognome == null) {
+			if (other.cognome != null)
+				return false;
+		} else if (!cognome.equals(other.cognome))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (ruoli == null) {
+			if (other.ruoli != null)
+				return false;
+		} else if (!ruoli.equals(other.ruoli))
+			return false;
+		if (stato != other.stato)
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+	
 
 }
 

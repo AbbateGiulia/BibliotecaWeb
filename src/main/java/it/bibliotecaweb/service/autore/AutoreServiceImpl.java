@@ -91,10 +91,6 @@ public class AutoreServiceImpl implements AutoreService {
 			// uso l'injection per il dao
 			autoreDAO.setEntityManager(entityManager);
 			
-			if (autoreInstance.getLibri().size() == 0) {
-				System.out.println("non puoi creare autore senza libri");
-				return b;
-			}
 
 			// eseguo quello che realmente devo fare
 			b=autoreDAO.insert(autoreInstance);
@@ -122,6 +118,10 @@ public class AutoreServiceImpl implements AutoreService {
 
 					// uso l'injection per il dao
 					autoreDAO.setEntityManager(entityManager);
+					
+					if (autoreInstance.getLibri().size() != 0) {
+						throw new Exception("non puoi eliminare autore con libri");
+					}
 
 					// eseguo quello che realmente devo fare
 					b=autoreDAO.delete(autoreInstance);

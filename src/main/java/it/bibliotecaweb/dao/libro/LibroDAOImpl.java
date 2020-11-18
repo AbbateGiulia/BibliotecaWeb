@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import it.bibliotecaweb.model.Libro;
 
@@ -13,12 +14,15 @@ public class LibroDAOImpl implements LibroDAO {
 
 	@Override
 	public Set<Libro> list() throws Exception {
-		return entityManager.createQuery("from Libro", Libro.class).getResultList().stream().collect(Collectors.toSet());
+		return entityManager.createQuery("from Libro l join fetch l.autore a", Libro.class).getResultList().stream()
+				.collect(Collectors.toSet());
 	}
 
 	@Override
 	public Libro get(Long id) throws Exception {
-		return entityManager.find(Libro.class, id);
+		TypedQuery<Libro> query = entityManager.createQuery("from Libro l join fetch l.autore a where l.id= ?1",
+				Libro.class);
+		return query.setParameter(1, id).getSingleResult();
 	}
 
 	@Override
@@ -54,6 +58,18 @@ public class LibroDAOImpl implements LibroDAO {
 			entityManager.remove(entityManager.merge(o));
 		}
 		return b;
+	}
+
+	public Set<Libro> searchLibro(Libro input) throws Exception {
+		TypedQuery<Libro> query = entityManager.createQuery(
+				"from Libro l join fetch l.autore a where l.titolo= ?1  and l.genere =?2 and l.trama = ?3 and a = ?4",
+				Libro.class);
+		query.setParameter(1, input.getTitolo());
+		query.setParameter(2, input.getGenere());
+		query.setParameter(3, input.getTrama());
+		query.setParameter(4, input.getAutore());
+		return query.getResultList().stream().collect(Collectors.toSet());
+
 	}
 
 	@Override

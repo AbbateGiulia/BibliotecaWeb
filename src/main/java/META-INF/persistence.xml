@@ -5,6 +5,10 @@
 	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 	<persistence-unit name="bibliotecaweb_unit" transaction-type="RESOURCE_LOCAL">
 		<!-- qui ci dovete mettere le entity -->
+		<class>it.bibliotecaweb.model.Autore</class>
+		<class>it.bibliotecaweb.model.Libro</class>
+		<class>it.bibliotecaweb.model.Utente</class>
+		<class>it.bibliotecaweb.model.Ruolo</class>
 		<properties>
 			<!-- setup con MySql -->
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
