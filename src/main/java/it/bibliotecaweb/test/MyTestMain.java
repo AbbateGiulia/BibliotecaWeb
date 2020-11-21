@@ -42,15 +42,17 @@ public class MyTestMain {
 			/*
 			 
 			 */
-			 Ruolo RuoloDaDb = ruoloServiceInstance.caricaSingoloElemento(1L);
-			 Ruolo RuoloDaDb2 = ruoloServiceInstance.caricaSingoloElemento(2L);
-			 Utente utente = new Utente ("Mari", "mariopass","Mario","Rossi");
-			 Set<Ruolo> listaRuoli = new HashSet<Ruolo>();
-			 listaRuoli.add(RuoloDaDb);
-			 listaRuoli.add(RuoloDaDb2);
-			 utente.setRuoli(listaRuoli);
-			 utenteServiceInstance.inserisciNuovo(utente);
+//			 Ruolo RuoloDaDb = ruoloServiceInstance.caricaSingoloElemento(1L);
+//			 Ruolo RuoloDaDb2 = ruoloServiceInstance.caricaSingoloElemento(2L);
+//			 Utente utente = new Utente ("Mari", "mariopass","Mario","Rossi");
+//			 Set<Ruolo> listaRuoli = new HashSet<Ruolo>();
+//			 listaRuoli.add(RuoloDaDb);
+//			 listaRuoli.add(RuoloDaDb2);
+//			 utente.setRuoli(listaRuoli);
+//			 utenteServiceInstance.inserisciNuovo(utente);
 			
+
+		System.out.println(autoreServiceInstance.caricaSingoloElemento(11L));
 					
 			
 

@@ -1,75 +1,70 @@
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html lang="it">
-  <head>
-    
-    <jsp:include page="./header.jsp" />
-    
-    <!-- Custom styles for this template -->
-    <link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
-    <style type="text/css">
-    	body {
-		  padding-top: 3.5rem;
-		}	
-    </style>
-    
-    <title>Biblioteca</title>
-  </head>
-  <body>
-  
-	<jsp:include page="./navbar.jsp"></jsp:include>
-  
-  
-	<main role="main">
 
-	  <!-- Main jumbotron for a primary marketing message or call to action -->
-	  <div class="jumbotron" >
+<html lang="it">
+	<head>
+	  <!-- Required meta tags -->
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	  <!-- Bootstrap CSS -->
+	  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/bootstrap.min.css" >
+	
+	  <title>Accedi</title>
 	  
+	  <!-- Favicons -->
+	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+	<link rel="icon" href="${pageContext.request.contextPath}/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+	<link rel="icon" href="${pageContext.request.contextPath}/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+	<link rel="manifest" href="${pageContext.request.contextPath}/assets/img/favicons/manifest.json">
+	<link rel="mask-icon" href="${pageContext.request.contextPath}/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+	<link rel="icon" href="${pageContext.request.contextPath}/assets/img/favicons/favicon.ico">
+	<meta name="msapplication-config" content="${pageContext.request.contextPath}/assets/img/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#563d7c">
+	
+	
+	   <style>
+	    .bd-placeholder-img {
+	      font-size: 1.125rem;
+	      text-anchor: middle;
+	      -webkit-user-select: none;
+	      -moz-user-select: none;
+	      -ms-user-select: none;
+	      user-select: none;
+	    }
+	
+	    @media (min-width: 768px) {
+	      .bd-placeholder-img-lg {
+	        font-size: 3.5rem;
+	      }
+	    }
+	  </style>
 	  
-	    <div class="container">
-	      <h1 class="display-3"> Biblioteca Online</h1>
-	      <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-	      
-	      
-	      <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/PrepareLoginServlet" role="button">Login &raquo;</a></p>  
-	     
-	      <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/visualizza/ListLibriServlet" role="button">Vai alla Lista di Libri &raquo;</a></p>
-	      <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/visualizza/ListAutoriServlet" role="button">Vai alla Lista di Autori &raquo;</a></p>
-	       <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/cerca/PrepareSearchLibroServlet" role="button">Cerca Libro &raquo;</a></p>
-	        <p><a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/cerca/PrepareSearchUtenteServlet" role="button">Cerca Utente &raquo;</a></p>
-	    
-	      
-	    </div>
-	    
-	    
-	  </div>
-	  
-	  <div class="container">
-	    <!-- Example row of columns -->
-	    <div class="row">
-	      <div class="col-md-4">
-	        <h2>Heading</h2>
-	        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-	        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-	      </div>
-	      <div class="col-md-4">
-	        <h2>Heading</h2>
-	        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-	        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-	      </div>
-	      <div class="col-md-4">
-	        <h2>Heading</h2>
-	        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-	        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-	      </div>
-	    </div>
-	
-	    <hr>
-	
-	  </div> <!-- /container -->
-	
-	</main>
-	
-	<jsp:include page="./footer.jsp" />
-  </body>
+	  <!-- Custom styles for this template -->
+	  <link href="${pageContext.request.contextPath}/assets/css/signin.css" rel="stylesheet">
+	</head>
+	<body class="text-center">
+		
+	   	<form class="form-signin" action="${pageContext.request.contextPath}/ExecuteLoginServlet" method="post">
+	   	
+		   	<div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}" role="alert">
+			  ${errorMessage}
+			</div>
+			
+			
+		  <img class="mb-4" src="${pageContext.request.contextPath}/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+		  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+		  <label for="inputUsername" class="sr-only">Username</label>
+		  <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+		  <label for="inputPassword" class="sr-only">Password</label>
+		  <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+		  <div class="checkbox mb-3">
+		   <!-- -
+		    <label>
+		      <input type="checkbox" value="remember-me"> Remember me
+		    </label>
+		     -->
+		  </div>
+		  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		  <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+		</form>
+	</body>
 </html>

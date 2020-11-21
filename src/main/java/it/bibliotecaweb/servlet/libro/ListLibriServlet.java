@@ -30,7 +30,7 @@ public class ListLibriServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//preparo la lista di articoli
+		//preparo la lista di libri
 		try {
 			request.setAttribute("listaLibriAttribute", MyServiceFactory.getLibroServiceInstance().listAll());
 		} catch (Exception e) {

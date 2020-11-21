@@ -20,7 +20,8 @@ public class UtenteDAOImpl implements UtenteDAO {
 
 	@Override
 	public Utente get(Long id) throws Exception {
-		return entityManager.find(Utente.class, id);
+		TypedQuery<Utente> query = entityManager.createQuery("select distinct u from Utente u JOIN FETCH u.ruoli r where u.id = ?1 ", Utente.class);
+		return query.setParameter(1, id).getSingleResult();
 	}
 
 	@Override
@@ -87,9 +88,9 @@ public class UtenteDAOImpl implements UtenteDAO {
 		if (input.getStato() != null) {
 			query1 = query1 + " AND u.stato = :stato";
 		}
-		if (input.getRuoli() != null) {
-			query1 = query1 + " AND u.ruoli = :ruoli";
-		}
+//		if (input.getRuoli() != null) {
+//			query1 = query1 + " AND u.ruoli = :ruoli";
+//		}
 
 		TypedQuery<Utente> query2 = entityManager.createQuery(query1, Utente.class);
 		if (input.getNome() != null) {
@@ -104,9 +105,9 @@ public class UtenteDAOImpl implements UtenteDAO {
 		if (input.getStato() != null) {
 			query2.setParameter("stato", input.getStato());
 		}
-		if (input.getRuoli() != null) {
-			query2.setParameter("ruoli", input.getRuoli().iterator().next());
-		}
+//		if (input.getRuoli() != null) {
+//			query2.setParameter("ruoli", input.getRuoli().iterator().next());
+//		}
 		if (input.equals(null)) {
 			this.list().toString();
 		}

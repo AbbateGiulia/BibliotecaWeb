@@ -13,7 +13,7 @@ import it.bibliotecaweb.service.MyServiceFactory;
 /**
  * Servlet implementation class PrepareInsertLibroServlet
  */
-@WebServlet("/PrepareInsertLibroServlet")
+@WebServlet("/insert/PrepareInsertLibroServlet")
 public class PrepareInsertLibroServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,7 +36,7 @@ public class PrepareInsertLibroServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("listaGeneriAttribute",Genere.conversioneGenere.values());
-		request.getRequestDispatcher("./jsp/libro/insertlibro.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsp/libro/insertlibro.jsp").forward(request, response);
 	}
 
 	/**

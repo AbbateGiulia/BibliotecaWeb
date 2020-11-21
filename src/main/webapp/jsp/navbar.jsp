@@ -9,7 +9,7 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="${pageContext.request.contextPath}/index.jsp">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="${pageContext.request.contextPath}/jsp/home.jsp">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
@@ -17,18 +17,18 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="./jsp/index.jsp">Home</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/ListArticoliServlet">Risultati</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/jsp/home.jsp">Home</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/ListLibriServlet">Risultati</a>
           <a class="dropdown-item" href="../insert.jsp">Inserisci nuovo elemento</a>
         </div>
       </li>
     </ul>
     
-    <c:if test = "${not empty sessionScope.oggettoSessione}"> 
+    <c:if test = "${not empty sessionScope.utente}"> 
 	   <div class="p-3 mb-2 bg-primary text-white"><span>Welcome ${sessionScope.oggettoSessione.getNome()} </span></div>
 	</c:if>
-	<c:if test = "${not empty sessionScope.oggettoSessione}">
-	   <a class="btn btn-secondary" href="${pageContext.request.contextPath}/LogoutServlet" role="button">Logout &raquo;</a>
+	<c:if test = "${not empty sessionScope.utente}">
+	   <a class="btn btn-secondary" href="${pageContext.request.contextPath}/ExecuteLogoutServlet" role="button">Logout &raquo;</a>
 	 </c:if>
 	    
     <form class="form-inline my-2 my-lg-0">

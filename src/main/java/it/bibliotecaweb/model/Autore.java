@@ -46,6 +46,12 @@ public class Autore {
 			return id;
 		}
 
+		public Autore(String nome, String cognome) {
+			super();
+			this.nome = nome;
+			this.cognome = cognome;
+		}
+
 		public void setId(Long id) {
 			this.id = id;
 		}
@@ -84,6 +90,44 @@ public class Autore {
 		
 		public String toString() {
 			return nome;
+		}
+
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Autore other = (Autore) obj;
+			if (cognome == null) {
+				if (other.cognome != null)
+					return false;
+			} else if (!cognome.equals(other.cognome))
+				return false;
+			if (dataNascita == null) {
+				if (other.dataNascita != null)
+					return false;
+			} else if (!dataNascita.equals(other.dataNascita))
+				return false;
+			if (id == null) {
+				if (other.id != null)
+					return false;
+			} else if (!id.equals(other.id))
+				return false;
+			if (libri == null) {
+				if (other.libri != null)
+					return false;
+			} else if (!libri.equals(other.libri))
+				return false;
+			if (nome == null) {
+				if (other.nome != null)
+					return false;
+			} else if (!nome.equals(other.nome))
+				return false;
+			return true;
 		}
 
 }

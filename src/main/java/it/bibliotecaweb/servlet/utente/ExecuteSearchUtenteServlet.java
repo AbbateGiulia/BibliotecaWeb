@@ -19,7 +19,7 @@ import it.bibliotecaweb.util.Util;
 /**
  * Servlet implementation class ExecuteSearchUtenteServlet
  */
-@WebServlet("/cerca/ExecuteSearchUtenteServlet")
+@WebServlet("/admin/ExecuteSearchUtenteServlet")
 public class ExecuteSearchUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

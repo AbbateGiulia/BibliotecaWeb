@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import it.bibliotecaweb.model.Libro;
+import it.bibliotecaweb.model.Utente;
 
 public class LibroDAOImpl implements LibroDAO {
 
@@ -61,14 +62,37 @@ public class LibroDAOImpl implements LibroDAO {
 	}
 
 	public Set<Libro> searchLibro(Libro input) throws Exception {
-		TypedQuery<Libro> query = entityManager.createQuery(
-				"from Libro l join fetch l.autore a where l.titolo= ?1  and l.genere =?2 and l.trama = ?3 and a = ?4",
-				Libro.class);
-		query.setParameter(1, input.getTitolo());
-		query.setParameter(2, input.getGenere());
-		query.setParameter(3, input.getTrama());
-		query.setParameter(4, input.getAutore());
-		return query.getResultList().stream().collect(Collectors.toSet());
+		String query1 = "FROM Libro l JOIN FETCH l.autore WHERE 1=1 ";
+		if (input.getTitolo() != null) {
+			query1 = query1 + " AND l.titolo like :titolo ";
+		}
+		if (input.getTrama() != null) {
+			query1 = query1 + " AND l.trama like :trama ";
+		}
+		if (input.getGenere() != null) {
+			query1 = query1 + " AND l.genere like :genere";
+		}
+		if (input.getAutore() != null) {
+			query1 = query1 + " AND l.autore = :autore";
+		}
+
+		TypedQuery<Libro> query2 = entityManager.createQuery(query1, Libro.class);
+		if (input.getTitolo() != null) {
+			query2.setParameter("titolo", '%' + input.getTitolo() + '%');
+		}
+		if (input.getTrama() != null) {
+			query2.setParameter("trama", '%' + input.getTrama() + '%');
+		}
+		if (input.getGenere() != null) {
+			query2.setParameter("genere",  input.getGenere());
+		}
+		if (input.getAutore() != null) {
+			query2.setParameter("autore", input.getAutore());
+		}
+		if (input.equals(null)) {
+			this.list().toString();
+		}
+		return query2.getResultList().stream().collect(Collectors.toSet());
 
 	}
 

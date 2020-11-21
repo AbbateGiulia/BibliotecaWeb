@@ -32,10 +32,6 @@
 		
 				
 				<h6 class="card-title">
-					<a class="btn btn-primary " href="${pageContext.request.contextPath}/PrepareInsertLibroServlet">Add New Libro</a>
-				</h6>
-				
-				<h6 class="card-title">
 					Cerca il tuo libro
 				</h6>
 
@@ -44,7 +40,7 @@
 
 
 					<div class="form-row">
-						<div class="form-group col-md-6">
+						<div class="form-group col-md-3">
 							<label>Titolo </label> 
 							<input type="text" name="titolo" id="titolo" class="form-control"
 								placeholder="Inserire il titolo">
@@ -52,10 +48,14 @@
 						</div>
 					</div>
 					
+					
+					
 						<div class="form-row">
 						<div class="form-group col-md-3">
-							<label>Autore <span class="text-danger">*</span></label>
-							<select	name="idAutore" id="idAutore">
+							<label>Autore <span class="text-danger">*</span></label> 
+							<div class="form-row">
+								<div class="form-group col-lg-12">
+							<select name="idAutore" id="idAutore" class="form-control" id="exampleFormControlSelect1">
 							<option selected value="-1"> Nessun Autore </option> 
 							<c:forEach items ="${requestScope.listaAutoriAttribute}" var ="autore"> 
 								<option value="${autore.id}">
@@ -65,6 +65,8 @@
 							</select>
 						</div>
 					</div>
+				</div>
+			</div>
 					
 					<div class="form-row">
 						<div class="form-group col-md-3">

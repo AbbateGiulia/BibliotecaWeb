@@ -7,14 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.bibliotecaweb.model.Genere;
 import it.bibliotecaweb.model.StatoUtente;
 import it.bibliotecaweb.service.MyServiceFactory;
 
 /**
  * Servlet implementation class PrepareSearchUtenteServlet
  */
-@WebServlet("/cerca/PrepareSearchUtenteServlet")
+@WebServlet("/admin/PrepareSearchUtenteServlet")
 public class PrepareSearchUtenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

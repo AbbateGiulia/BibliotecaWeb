@@ -6,6 +6,7 @@ import it.bibliotecaweb.dao.autore.AutoreDAO;
 import it.bibliotecaweb.model.Autore;
 
 
+
 public interface AutoreService {
 	
 	public Set<Autore> listAll() throws Exception;
@@ -17,6 +18,8 @@ public interface AutoreService {
 	public boolean inserisciNuovo(Autore autoreInstance) throws Exception;
 
 	public boolean rimuovi(Autore autoreInstance) throws Exception;
+	
+	public Set<Autore> ricercaAutore (Autore input) throws Exception;
 
 
 	// per injection

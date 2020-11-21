@@ -40,8 +40,11 @@
 		    <div class='card-header'>
 		        <h5>Lista dei risultati</h5> 
 		    </div>
-		    <div class='card-body'>	   
-		    	<a class="btn btn-primary " href="${pageContext.request.contextPath}/PrepareInsertSoloArticoloServlet">Add New</a>
+		    <h6 class="card-title">
+					<a class="btn btn-primary "
+						href="${pageContext.request.contextPath}/admin/PrepareInsertUtenteServlet">Add
+						New Utente</a>
+				</h6>
 		    
 		        <div class='table-responsive'>
 		            <table class='table table-striped ' >
@@ -53,6 +56,7 @@
 		                        <th>Username</th>		                 
 		                        <th>Stato</th>
 		                        <th>Ruolo</th>
+		                        <th>Azioni</th>
 		                        		                        
 		                    </tr>
 		                </thead>
@@ -66,16 +70,18 @@
 		                        <td><c:out value =" ${utente.cognome}"/></td>
 		                        <td><c:out value =" ${utente.username}"/></td>
 		                        <td><c:out value =" ${utente.stato}"/></td>
+		                        <td>
 		                        <c:forEach items ="${utente.getRuoli()}" var ="ruolo">
-		                        <td><c:out value =" ${ruolo.getDescrizione()}"/></td>
+		                        <c:out value =" ${ruolo.getDescrizione()}"/>
 		                         </c:forEach>
+		                         </td>
 		                        <td>
 									
-									<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/VisualizzaLibroServlet?IdDaInviareComeParametro=${libro.id}">Visualizza</a>
+									<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/admin/VisualizzaUtenteServlet?IdDaInviareComeParametro=${utente.id}">Visualizza</a>
 												
-									<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/PrepareUpdateSoloArticoloServlet?IdDaInviareComeParametro=${articolo.id}">Edit</a>									
+									<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/admin/PrepareUpdateUtenteServlet?IdDaInviareComeParametro=${utente.id}">Edit</a>									
 									
-									<a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath}/ExecuteDeleteSoloArticoloServlet?id=${articolo.id}">Delete</a>
+									<a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath}/admin/PrepareDeleteUtenteServlet?IdDaInviareComeParametro=${utente.id}">Delete</a>
 									
 								</td>
 		                    </tr>

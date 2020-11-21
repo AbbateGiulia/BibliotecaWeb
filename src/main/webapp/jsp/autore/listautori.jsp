@@ -41,8 +41,9 @@
 		    <div class='card-header'>
 		        <h5>Lista dei risultati</h5> 
 		    </div>
-		    <div class='card-body'>	   
-		    	<a class="btn btn-primary " href="${pageContext.request.contextPath}/PrepareInsertSoloArticoloServlet">Add New</a>
+		    <div class='card-body'>	 
+		      
+		    	<a class="btn btn-primary " href="${pageContext.request.contextPath}/insert/PrepareInsertAutoreServlet?nomeCriteria=${requestScope.nomeCriteria}&cognomeCriteria=${requestScope.cognomeCriteria}">Add New</a>
 		    
 		        <div class='table-responsive'>
 		            <table class='table table-striped ' >
@@ -67,12 +68,13 @@
 		          
 		                        <td>
 									
-									<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/VisualizzaSoloArticoloServlet?IdDaInviareComeParametro=${articolo.id}">Visualizza</a>
-												
-									<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/PrepareUpdateSoloArticoloServlet?IdDaInviareComeParametro=${articolo.id}">Edit</a>									
+									<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/visualizza/VisualizzaAutoreServlet?IdDaInviareComeParametro=${autore.id}">Visualizza</a>
 									
-									<a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath}/ExecuteDeleteSoloArticoloServlet?id=${articolo.id}">Delete</a>
+									<c:if test = "${sessionScope.isAdmin ==true || sessionScope.isClassic ==true  }">						
+									<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/update/PrepareUpdateAutoreServlet?IdDaInviareComeParametro=${autore.id}">Edit</a>									
 									
+									<a class="btn btn-outline-danger btn-sm" href="${pageContext.request.contextPath}/delete/PrepareDeleteAutoreServlet?IdDaInviareComeParametro=${autore.id}">Delete</a>
+									</c:if>
 								</td>
 		                    </tr>
 		                    </c:forEach>

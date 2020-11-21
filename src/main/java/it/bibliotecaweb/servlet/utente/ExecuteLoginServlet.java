@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.bibliotecaweb.model.CodiceRuolo;
+import it.bibliotecaweb.model.Ruolo;
+import it.bibliotecaweb.model.StatoUtente;
 import it.bibliotecaweb.model.Utente;
 import it.bibliotecaweb.service.MyServiceFactory;
 import it.bibliotecaweb.service.utente.UtenteService;
@@ -46,7 +49,7 @@ public class ExecuteLoginServlet extends HttpServlet {
 		 
 		if (usernameInput.isEmpty() || passwordInput.isEmpty()) {
 			request.setAttribute("errorMessage", "Attenzione sono presenti errori di validazione");
-			request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
 			return;
 		}	
 		UtenteService service= MyServiceFactory.getUtenteServiceInstance();
@@ -55,19 +58,48 @@ public class ExecuteLoginServlet extends HttpServlet {
 			result=service.cercaUser(usernameInput);
 			if(result== null||!result.getPassword().equals(passwordInput)) {
 				request.setAttribute("errorMessage", "User o password errati!");
-				request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+				request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+				return;	
+			}
+			if(StatoUtente.DISABILITATO.equals(result.getStato())) {
+				request.setAttribute("errorMessage", "Utente disabilitato!");
+				request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
 				return;	
 			}
 		} catch (Exception e) {
-			request.getRequestDispatcher("/jsp/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
 			e.printStackTrace();
 			return;
 		}
-		 request.getSession().setAttribute("oggettoSessione", result);
+		
+		boolean admin = false;
+		boolean classic = false;
+		boolean guest = false;
+
+		for(Ruolo ruolo : result.getRuoli()) {
+			if (CodiceRuolo.ADMIN_ROLE == ruolo.getCodice()) {
+				admin = true;
+			}
+			if(CodiceRuolo.CLASSIC_ROLE == ruolo.getCodice()) {
+				classic = true;
+			}
+			if(CodiceRuolo.GUEST_ROLE == ruolo.getCodice()) {
+				guest = true;
+			}
+		}
+		 request.getSession().setAttribute("isGuest", guest);
+		 request.getSession().setAttribute("isClassic", classic);
+		 request.getSession().setAttribute("isAdmin", admin);
+		 request.getSession().setAttribute("utente", result);
 		 
-		 request.getRequestDispatcher("/jsp/index.jsp").forward(request, response);
+		 request.getRequestDispatcher("/jsp/home.jsp").forward(request, response);
 		
 		
 	}
+			
+		}
 
-}
+		
+
+
+

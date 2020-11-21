@@ -3,7 +3,7 @@
 <html lang="it">
 <head>
 <jsp:include page="../header.jsp" />
-<title>cerca libro</title>
+<title>cerca utente</title>
 
 <!-- style per le pagine diverse dalla index -->
 <link href="${pageContext.request.contextPath}/assets/css/global.css"
@@ -32,16 +32,11 @@
 			<div class='card-body'>
 
 
-				<h6 class="card-title">
-					<a class="btn btn-primary "
-						href="${pageContext.request.contextPath}/PrepareInsertLibroServlet">Add
-						New Utente</a>
-				</h6>
-
+			
 				<h6 class="card-title">Cerca Utente</h6>
 
 				<form method="post"
-					action="${pageContext.request.contextPath}/cerca/ExecuteSearchUtenteServlet"
+					action="${pageContext.request.contextPath}/admin/ExecuteSearchUtenteServlet"
 					class="needs-validation" novalidate>
 
 
@@ -68,7 +63,7 @@
 								id="username" class="form-control" placeholder="Inserire username">
 						</div>
 					</div>
-
+<!--  
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label>Ruolo </label>
@@ -86,7 +81,7 @@
 							</div>
 						</div>
 					</div>
-					
+	-->				
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label>Stato </label>

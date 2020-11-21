@@ -59,11 +59,6 @@ public class LibroServiceImpl implements LibroService {
 
 		boolean b = false;
 
-		for (Libro c : libroDAO.list()) {
-			if (c.equals(libroInstance)) {
-				throw new Exception("trama già esistente");
-			}
-		}
 		// questo Ã¨ come una connection
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
 
