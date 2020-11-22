@@ -40,7 +40,7 @@
 
 				<form method="post"
 					action="${pageContext.request.contextPath}/admin/ExecuteInsertUtenteServlet"
-					class="needs-validation" novalidate>
+					class="needs-validation" id="form">
 					
 					<c:set var="utente"
 					value="${requestScope.utenteAttribute}" />
@@ -109,7 +109,45 @@
 
 				<script
 					src="${pageContext.request.contextPath}/assets/js/myscript.js"></script>
+				<script src="${pageContext.request.contextPath}/assets/js/jquery-3.4.1.min.js"></script>
+				<script src="${pageContext.request.contextPath}/assets/js/jquery-3.4.1.slim.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
+				<script>
+				$(document).ready(function () {
 
+					$('#form').validate({
+					    rules: {
+					        nome: {
+					            minlength: 2,
+					            required: true
+					        },
+					        cognome: {
+					        	minlength: 2,
+					            required: true
+					        },
+					        username: {   
+					        	minlength: 2,
+					            required: true
+					        },
+					        ruolo: {   
+					            required: true
+					        },
+					        stato: {   
+						            required: true
+						    },
+					        
+					    },
+					    highlight: function (element) {
+					        $(element).closest('.form-control').removeClass('success').addClass('error');
+					    },
+					    success: function (element) {
+					        element.text('OK!').addClass('valid')
+					            .closest('.form-control').removeClass('error').addClass('success');
+					    }
+					});
+				});
+				</script>
+				
 
 
 				<!-- end card-body -->

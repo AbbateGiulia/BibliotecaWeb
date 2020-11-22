@@ -49,7 +49,7 @@
 				</h6>
 
 				<form method="post" action="${pageContext.request.contextPath}/update/ExecuteUpdateLibroServlet"
-					class="needs-validation" novalidate>
+					class="needs-validation" id="form">
 
 					<c:set var="libro"
 					value="${requestScope.LibroAttribute}" />
@@ -75,7 +75,7 @@
 							<label>Autore <span class="text-danger">*</span></label> 
 							<div class="form-row">
 								<div class="form-group col-lg-12">
-							<select name="idAutore" id="idAutore" class="form-control" id="exampleFormControlSelect1">
+							<select name="idAutore" id="idAutore" class="form-control" id="exampleFormControlSelect1" required>
 							<option selected value="${libro.autore.id}"> 
 							<c:out value="${libro.autore.nome} ${libro.autore.cognome}"/>
 							</option>	
@@ -118,6 +118,43 @@
 				</form>
 				
 				<script src="${pageContext.request.contextPath}/assets/js/myscript.js"></script>
+				<script src="${pageContext.request.contextPath}/assets/js/jquery-3.4.1.min.js"></script>
+				<script src="${pageContext.request.contextPath}/assets/js/jquery-3.4.1.slim.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js" integrity="sha512-UdIMMlVx0HEynClOIFSyOrPggomfhBKJE28LKl8yR3ghkgugPnG6iLfRfHwushZl1MOPSY6TsuBDGPK2X4zYKg==" crossorigin="anonymous"></script>
+				<script>
+				$(document).ready(function () {
+
+					$('#form').validate({
+					    rules: {
+					        titolo: {
+					            minlength: 2,
+					            required: true
+					        },
+					        idAutore: {
+					        	minlength: 2,
+					            required: true
+					        },
+					        trama: {   
+					        	minlength: 2
+					            required: true
+					        }
+					        genere: {   
+					        	minlength: 2
+					            required: true
+					        }
+					        
+					    },
+					    highlight: function (element) {
+					        $(element).closest('.form-control').removeClass('success').addClass('error');
+					    },
+					    success: function (element) {
+					        element.text('OK!').addClass('valid')
+					            .closest('.form-control').removeClass('error').addClass('success');
+					    }
+					});
+					});
+				</script>
+				
 
 
 
